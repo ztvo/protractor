@@ -1,27 +1,30 @@
 import {McDonaldHomePage} from './mcDonaldPage';
 import {McDonaldLoginPage} from './mcDonaldLoginPage';
-import {browser, ExpectedConditions} from 'protractor';
 
-describe('Tests on TS using page objects of netflix', () => {    
+describe('tests on TS using page objects', () => {
+    //const mcDonaldHomepage = new McDonaldHomePage();
 
-    it('Netflix home page',  async () => {       
+    //beforeEach(async () => {        
+    //    await mcDonaldHomepage.open();
+    //});
+
+    it('logo exists on McDonalds home page',  async () => {
         const mcDonaldHomepage = new McDonaldHomePage();
-        await mcDonaldHomepage.get();                      
-        expect(await mcDonaldHomepage.logoMcDonald.isPresent()).toBe(true);
+        await mcDonaldHomepage.open();
+        expect(await mcDonaldHomepage.logoMcDonald.isDisplayed()).toBe(true);
     });
 
-    it('Netflix login page', async () =>  {                
+    it('registartion with an existed email ', async () => {
         const mcDonaldHomepage = new McDonaldHomePage();
-        await mcDonaldHomepage.get();   
-        await mcDonaldHomepage.btnJoin.click();     
+        await mcDonaldHomepage.open();
+        await mcDonaldHomepage.btnJoinClick();
         const mcDonaldLoginPage = new McDonaldLoginPage();
-        
         await mcDonaldLoginPage.setEmail('tvo@gmail.com');
-        await mcDonaldLoginPage.setZip('12345');               
-        expect(await mcDonaldLoginPage.getEmail()).toEqual('tvo@gmail.com');  
-        expect(await mcDonaldLoginPage.getZip()).toEqual('12345');  
-        await browser.wait(ExpectedConditions.elementToBeClickable(mcDonaldLoginPage.btnSubmit), 5000);        
-        await mcDonaldLoginPage.btnSubmit.click(); 
+        await mcDonaldLoginPage.setZip('12347');
+        expect(await mcDonaldLoginPage.getEmail()).toEqual('tvo@gmail.com');
+        expect(await mcDonaldLoginPage.getZip()).toEqual('12347');
+        await mcDonaldLoginPage.btnSubmitClick();
+        expect(await mcDonaldLoginPage.registrationErrorMsg.isDisplayed()).toBe(true);
     });
 
 })

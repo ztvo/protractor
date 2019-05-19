@@ -1,8 +1,14 @@
 import {browser, element, by} from 'protractor';
 export class McDonaldHomePage {
-    btnJoin = element(by.linkText('Join'));    
-    logoMcDonald = element(by.className('component-logo'));
-    async get(): Promise<void> {
+    protected btnJoin = element(by.css('#join-us-header.link.joinpreference'));    
+    logoMcDonald = element(by.css('.desktop-nav>a.component-logo'));    
+
+    async open(): Promise<void> {
       await browser.get('https://www.mcdonalds.com');
     }
+
+    async btnJoinClick(): Promise<void> {
+      await this.btnJoin.click();
+    }
+
 }
