@@ -2,21 +2,17 @@ import {McDonaldHomePage} from './mcDonaldPage';
 import {McDonaldLoginPage} from './mcDonaldLoginPage';
 
 describe('tests on TS using page objects', () => {
-    //const mcDonaldHomepage = new McDonaldHomePage();
+    const mcDonaldHomepage = new McDonaldHomePage();
 
-    //beforeEach(async () => {        
-    //    await mcDonaldHomepage.open();
-    //});
+    beforeEach(async () => {        
+        await mcDonaldHomepage.open();
+    });
 
     it('logo exists on McDonalds home page',  async () => {
-        const mcDonaldHomepage = new McDonaldHomePage();
-        await mcDonaldHomepage.open();
         expect(await mcDonaldHomepage.logoMcDonald.isDisplayed()).toBe(true);
     });
 
     it('registartion with an existed email ', async () => {
-        const mcDonaldHomepage = new McDonaldHomePage();
-        await mcDonaldHomepage.open();
         await mcDonaldHomepage.btnJoinClick();
         const mcDonaldLoginPage = new McDonaldLoginPage();
         await mcDonaldLoginPage.setEmail('tvo@gmail.com');
